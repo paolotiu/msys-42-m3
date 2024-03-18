@@ -1,0 +1,121 @@
+/* the props */
+@import 'https://unpkg.com/open-props';
+
+/* optional imports that use the props */
+@import 'https://unpkg.com/open-props/normalize.min.css';
+@import 'https://unpkg.com/open-props/buttons.min.css';
+
+/* just dark or light themes */
+/* @import 'https://unpkg.com/open-props/normalize.dark.min.css';
+@import 'https://unpkg.com/open-props/buttons.dark.min.css';
+@import 'https://unpkg.com/open-props/normalize.light.min.css';
+@import 'https://unpkg.com/open-props/buttons.light.min.css'; */
+
+/* individual imports */
+@import 'https://unpkg.com/open-props/indigo.min.css';
+@import 'https://unpkg.com/open-props/indigo-hsl.min.css';
+@import 'https://unpkg.com/open-props/easings.min.css';
+@import 'https://unpkg.com/open-props/animations.min.css';
+@import 'https://unpkg.com/open-props/sizes.min.css';
+@import 'https://unpkg.com/open-props/gradients.min.css';
+/* see PropPacks for the full list */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fff;
+}
+
+.navbar {
+  padding-inline: var(--size-2);
+  padding-block: var(--size-2);
+  border-bottom: 1px solid var(--gray-4);
+}
+
+.container {
+  padding-inline: var(--size-8);
+  padding-block-start: var(--size-9);
+  position: relative;
+}
+
+table {
+  width: 100%;
+  border: none;
+  background-color: initial;
+  border-collapse: collapse;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-block-start: var(--size-4);
+  border: 1px solid var(--gray-4);
+  border-radius: var(--radius-2);
+}
+
+td,
+th,
+tr {
+  background-color: initial;
+}
+
+th {
+  padding-block: var(--size-2);
+  padding-inline: var(--size-4);
+  border-bottom: 1px solid var(--gray-4);
+}
+
+:where(table thead tr:first-child th:last-child) {
+  border-start-end-radius: var(--radius-2);
+}
+
+:where(table thead tr:first-child th:first-child) {
+  border-start-start-radius: var(--radius-2);
+}
+
+:where(table:not(:has(tfoot)) tr:last-child td:first-child) {
+  border-end-start-radius: var(--radius-2);
+}
+:where(table:not(:has(tfoot)) tr:last-child td:last-child) {
+  border-end-end-radius: var(--radius-2);
+}
+
+tr:nth-child(even) {
+  background-color: var(--gray-1);
+}
+
+.dropdown-panel {
+  left: 0;
+  margin-top: var(--size-2);
+  background-color: #fff;
+  box-shadow: var(--shadow-4);
+  z-index: 10;
+  border: 1px solid var(--gray-4);
+  border-radius: var(--radius-2);
+  width: 150px;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+.dropdown-panel button {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+  padding-block: var(--size-2);
+  padding-inline: var(--size-4);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  border-radius: var(--radius-2);
+}
+
+.dropdown-panel button:hover {
+  background-color: var(--gray-1);
+}
+
+.dropdown-panel button.danger {
+  color: var(--red-6);
+}

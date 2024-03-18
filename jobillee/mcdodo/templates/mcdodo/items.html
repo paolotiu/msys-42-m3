@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="container">
+	<div x-data="{ open: false}" class="">
+		<button @click="open = true">
+			+ Add Item
+		</button>
+		<form x-show="open">
+			<input type="text" name="name" placeholder="Item Name">
+			<input type="number" name="price" placeholder="Price">
+			<input type="number" name="quantity" placeholder="Quantity">
+			<button type="submit">Add Item</button>
+			<button @click="open = false" type="button">
+				Cancel
+			</button>
+		</form>
+	</div>
+
+
+	<div class="table-container">
+
+		<table>
+			<thead>
+				<tr>
+					<th>Item Name</th>
+					<th>Price</th>
+					<th>Quantity</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for item in items %}
+				<tr x-data="{
+					itemId: {{item.id}},
+					state: 'view',
+					item: {{ item }},
+				}
+					">
+					<td>
+						<span x-show="state === 'view'">{{ item.name }}</span>
+						<input form="item-{{ item.id }}" name="name" x-show="state === 'edit'" type="text" x-model="item.name">
+						</span>
+					</td>
+					<td>
+						<span x-show="state === 'view'"> PHP {{ item.price }}</span>
+						<input form="item-{{ item.id }}" name="price" x-show="state === 'edit'" type="number" x-model="item.price">
+					</td>
+					<td>
+						<span x-show="state === 'view'">{{ item.quantity }}</span>
+						<input form="item-{{ item.id }}" name="quantity" x-show="state === 'edit'" type="number"
+							x-model="item.quantity">
+
+					</td>
+					<td x-data="{
+            open: false,
+            toggle() {
+                if (this.open) {
+										closeDD({{ item.id }})
+                    return this.close()
+
+                }
+
+                this.$refs.button.focus()
+                this.open = true
+								openDD({{ item.id }})
+            },
+            close(focusAfter) {
+                if (! this.open) return
+ 
+                this.open = false
+ 
+                focusAfter && focusAfter.focus()
+            },
+						edit() {
+							this.state = 'edit';
+							this.open = false;
+						},
+						cancelEdit() {
+							this.state = 'view';
+						}
+        }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+						x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']"
+						style="position: relative;">
+
+
+						<button id="dd-btn-{{item.id}}" x-show="state == 'view'" x-ref="button" x-on:click="toggle()"
+							:aria-expanded="open" :aria-controls="$id('dropdown-button')" type="button">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+								stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+								class="lucide lucide-more-horizontal">
+								<circle cx="12" cy="12" r="1" />
+								<circle cx="19" cy="12" r="1" />
+								<circle cx="5" cy="12" r="1" />
+							</svg>
+						</button>
+
+						<form id="item-{{ item.id }}">
+							{% csrf_token %}
+						</form>
+
+						<button form="item-{{ item.id }}" x-show="state == 'edit'" type="submit">
+							Save
+						</button>
+						<button x-show="state == 'edit'" type="button" @click="cancelEdit">
+							Cancel
+						</button>
+
+						<div x-show="open" :id="$id('dropdown-button')" x-ref="panel" x-transition.origin.top.left
+							x-on:click.outside="close($refs.button)" style="display: none;" class="dropdown-panel dd-p-{{item.id}}">
+
+							<button x-on:click="edit()">
+								Edit
+							</button>
+							<button class="danger">
+								Delete
+							</button>
+						</div>
+
+
+
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</section>
+
+<!-- For dropdown -->
+
+<script>
+
+
+	const currentFloating = new Map()
+	function openDD(id) {
+		const btn = document.getElementById(`dd-btn-${id}`)
+		const panel = document.querySelector(`.dd-p-${id}`)
+
+		const cleanup = window.FloatingUIDOM.autoUpdate(btn, panel, () => window.FloatingUIDOM.computePosition(btn, panel, {
+			strategy: 'fixed',
+			placement: 'bottom-start',
+			alignment: 'start',
+		}).then(({ x, y }) => {
+			panel.style.left = `${x}px`
+			panel.style.top = `${y}px`
+		}))
+
+		currentFloating.set(id, cleanup)
+	}
+
+	function closeDD(id) {
+		const cleanup = currentFloating.get(id)
+
+		if (cleanup) {
+			cleanup()
+			currentFloating.delete(id)
+		}
+	}
+</script>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{% static '/index.css' %}" rel="stylesheet">
+	<link href="{% static '/mcdodo/items.css' %}" rel="stylesheet">
+	<title>Mcdodo POS</title>
+
+
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@floating-ui/core@1.6.0"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@floating-ui/dom@1.6.3"></script>
+
+
+</head>
+
+<body x-data="" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+	<div class="navbar">
+		Mcdodo POS
+	</div>
+
+
+	{% block content %}
+	{% endblock %}
+
+</body>
+
+</html>
