@@ -4,3 +4,7 @@
   gap: 1rem;
   max-width: 350px;
 }
+
+.table-container {
+  padding-bottom: 4rem;
+}
