@@ -257,7 +257,7 @@ CREATE TABLE `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime(6) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -266,7 +266,7 @@ CREATE TABLE `django_migrations` (
 
 LOCK TABLES `django_migrations` WRITE;
 /*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
-INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2024-02-28 03:35:52.992540'),(2,'auth','0001_initial','2024-02-28 03:35:53.133980'),(3,'admin','0001_initial','2024-02-28 03:35:53.180028'),(4,'admin','0002_logentry_remove_auto_add','2024-02-28 03:35:53.185522'),(5,'admin','0003_logentry_add_action_flag_choices','2024-02-28 03:35:53.188987'),(6,'contenttypes','0002_remove_content_type_name','2024-02-28 03:35:53.213048'),(7,'auth','0002_alter_permission_name_max_length','2024-02-28 03:35:53.227728'),(8,'auth','0003_alter_user_email_max_length','2024-02-28 03:35:53.237434'),(9,'auth','0004_alter_user_username_opts','2024-02-28 03:35:53.240852'),(10,'auth','0005_alter_user_last_login_null','2024-02-28 03:35:53.254109'),(11,'auth','0006_require_contenttypes_0002','2024-02-28 03:35:53.254655'),(12,'auth','0007_alter_validators_add_error_messages','2024-02-28 03:35:53.257786'),(13,'auth','0008_alter_user_username_max_length','2024-02-28 03:35:53.275252'),(14,'auth','0009_alter_user_last_name_max_length','2024-02-28 03:35:53.289450'),(15,'auth','0010_alter_group_name_max_length','2024-02-28 03:35:53.296599'),(16,'auth','0011_update_proxy_permissions','2024-02-28 03:35:53.299596'),(17,'auth','0012_alter_user_first_name_max_length','2024-02-28 03:35:53.313196'),(18,'sessions','0001_initial','2024-02-28 03:35:53.320517'),(19,'mcdodo','0001_initial','2024-03-16 06:48:12.860395'),(20,'mcdodo','0002_rename_items_item','2024-03-18 16:46:42.814816'),(21,'mcdodo','0003_order_item_order','2024-03-18 17:15:59.436713');
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2024-02-28 03:35:52.992540'),(2,'auth','0001_initial','2024-02-28 03:35:53.133980'),(3,'admin','0001_initial','2024-02-28 03:35:53.180028'),(4,'admin','0002_logentry_remove_auto_add','2024-02-28 03:35:53.185522'),(5,'admin','0003_logentry_add_action_flag_choices','2024-02-28 03:35:53.188987'),(6,'contenttypes','0002_remove_content_type_name','2024-02-28 03:35:53.213048'),(7,'auth','0002_alter_permission_name_max_length','2024-02-28 03:35:53.227728'),(8,'auth','0003_alter_user_email_max_length','2024-02-28 03:35:53.237434'),(9,'auth','0004_alter_user_username_opts','2024-02-28 03:35:53.240852'),(10,'auth','0005_alter_user_last_login_null','2024-02-28 03:35:53.254109'),(11,'auth','0006_require_contenttypes_0002','2024-02-28 03:35:53.254655'),(12,'auth','0007_alter_validators_add_error_messages','2024-02-28 03:35:53.257786'),(13,'auth','0008_alter_user_username_max_length','2024-02-28 03:35:53.275252'),(14,'auth','0009_alter_user_last_name_max_length','2024-02-28 03:35:53.289450'),(15,'auth','0010_alter_group_name_max_length','2024-02-28 03:35:53.296599'),(16,'auth','0011_update_proxy_permissions','2024-02-28 03:35:53.299596'),(17,'auth','0012_alter_user_first_name_max_length','2024-02-28 03:35:53.313196'),(18,'sessions','0001_initial','2024-02-28 03:35:53.320517'),(19,'mcdodo','0001_initial','2024-03-16 06:48:12.860395'),(20,'mcdodo','0002_rename_items_item','2024-03-18 16:46:42.814816'),(21,'mcdodo','0003_order_item_order','2024-03-18 17:15:59.436713'),(22,'mcdodo','0004_alter_order_order_date','2024-04-08 07:31:49.558437'),(23,'mcdodo','0005_item_item_stock','2024-04-08 07:44:19.553288');
 /*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -306,6 +306,7 @@ CREATE TABLE `mcdodo_item` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `item_name` varchar(100) NOT NULL,
   `item_price` decimal(6,2) NOT NULL,
+  `item_stock` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -316,7 +317,7 @@ CREATE TABLE `mcdodo_item` (
 
 LOCK TABLES `mcdodo_item` WRITE;
 /*!40000 ALTER TABLE `mcdodo_item` DISABLE KEYS */;
-INSERT INTO `mcdodo_item` VALUES (1,'1pc Chicken',120.00),(2,'2pc Chicken',219.00),(3,'3pc Chicken',329.00),(4,'4pc Chicken',439.00),(5,'6pc Chicken',659.00),(6,'8pc Chicken',879.00),(7,'10pc Chicken',1099.00),(8,'12pc Chicken',1319.00),(9,'15pc Chicken',1649.00),(10,'20pc Chicken',2199.00),(41,'asd',34.00);
+INSERT INTO `mcdodo_item` VALUES (1,'1pc Chicken',120.00,1000),(2,'2pc Chicken',219.00,0),(3,'3pc Chicken',329.00,3),(4,'4pc Chicken',439.00,0),(5,'6pc Chicken',659.00,0),(6,'8pc Chicken',879.00,0),(7,'10pc Chicken',1099.00,0),(8,'12pc Chicken',1319.00,0),(9,'15pc Chicken',1649.00,0),(10,'20pc Chicken',2199.00,0),(41,'asd',34.00,0);
 /*!40000 ALTER TABLE `mcdodo_item` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +339,7 @@ CREATE TABLE `mcdodo_item_order` (
   KEY `mcdodo_item_order_order_id_id_cfa270d7_fk_mcdodo_order_id` (`order_id_id`),
   CONSTRAINT `mcdodo_item_order_item_id_id_2298cdc0_fk_mcdodo_item_id` FOREIGN KEY (`item_id_id`) REFERENCES `mcdodo_item` (`id`),
   CONSTRAINT `mcdodo_item_order_order_id_id_cfa270d7_fk_mcdodo_order_id` FOREIGN KEY (`order_id_id`) REFERENCES `mcdodo_order` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,6 +348,7 @@ CREATE TABLE `mcdodo_item_order` (
 
 LOCK TABLES `mcdodo_item_order` WRITE;
 /*!40000 ALTER TABLE `mcdodo_item_order` DISABLE KEYS */;
+INSERT INTO `mcdodo_item_order` VALUES (1,120.00,1,1,1),(2,360.00,3,1,2),(3,1200.00,10,1,4),(4,960.00,8,1,5),(5,1080.00,9,1,6),(6,240.00,2,1,14),(7,120.00,1,1,15),(8,438.00,2,2,16),(9,438.00,2,2,16),(10,0.00,0,2,17),(11,438.00,2,2,18),(12,987.00,3,3,19),(13,329.00,1,3,20);
 /*!40000 ALTER TABLE `mcdodo_item_order` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -363,7 +365,7 @@ CREATE TABLE `mcdodo_order` (
   `order_date` date NOT NULL,
   `payment_type` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -372,6 +374,7 @@ CREATE TABLE `mcdodo_order` (
 
 LOCK TABLES `mcdodo_order` WRITE;
 /*!40000 ALTER TABLE `mcdodo_order` DISABLE KEYS */;
+INSERT INTO `mcdodo_order` VALUES (1,120.00,'2024-04-08','1'),(2,360.00,'2024-04-08','1'),(3,1200.00,'2024-04-08','1'),(4,1200.00,'2024-04-08','1'),(5,960.00,'2024-04-08','1'),(6,1080.00,'2024-04-08','1'),(7,0.00,'2024-04-08','1'),(8,0.00,'2024-04-08','1'),(9,0.00,'2024-04-08','1'),(10,0.00,'2024-04-08','1'),(11,0.00,'2024-04-08','1'),(12,0.00,'2024-04-08','1'),(13,0.00,'2024-04-08','1'),(14,240.00,'2024-04-08','1'),(15,120.00,'2024-04-08','1'),(16,438.00,'2024-04-08','2'),(17,0.00,'2024-04-08','2'),(18,438.00,'2024-04-08','1'),(19,987.00,'2024-04-08','1'),(20,329.00,'2024-04-08','1');
 /*!40000 ALTER TABLE `mcdodo_order` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -384,4 +387,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-19  1:18:04
+-- Dump completed on 2024-04-08 16:39:46
